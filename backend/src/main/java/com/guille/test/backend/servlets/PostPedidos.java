@@ -38,11 +38,6 @@ public class PostPedidos extends HttpServlet {
 			while ((line = reader.readLine()) != null) {
 				sb.append(line).append('\n');
 			}
-		} catch (JSONException e) {
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			jsonResponse.put("message", "Error parsing JSON request string");
-			out.print(jsonResponse);
-			out.flush();
 		} finally {
 			reader.close();
 		}
