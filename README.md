@@ -8,6 +8,7 @@ Corer  con maven
 
 ``mvn clean install``
 
+Correr desde eclipse, deployar el war en un tomcat, o como se guste
 
 # Frontend
 ------------
