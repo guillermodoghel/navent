@@ -1,7 +1,7 @@
 # Backend
 ------------
 
-``cd backend``
+``cd backend/``
 
 ### Configuracion
 Corer  con maven
@@ -9,10 +9,10 @@ Corer  con maven
 ``mvn clean install``
 
 
-# Backend
+# Frontend
 ------------
 
-``cd frontend``
+``cd frontend/``
 
 ### Configuracion
 
