@@ -38,13 +38,23 @@ public class PostPedidos extends HttpServlet {
 			while ((line = reader.readLine()) != null) {
 				sb.append(line).append('\n');
 			}
+		} catch (JSONException e) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			jsonResponse.put("message", "Error parsing JSON request string");
+			out.print(jsonResponse);
+			out.flush();
 		} finally {
 			reader.close();
 		}
 		
 		try {
 			JSONObject jsonObject = new JSONObject(sb.toString());
-			Pedido p = new Pedido(jsonObject.getString("nombre"), jsonObject.getInt("monto"), jsonObject.getInt("descuento"));
+	
+			if(jsonObject.getString("descuento").equals("")) {
+				jsonObject.put("descuento", 0);	
+			}
+			
+			Pedido p = new Pedido(jsonObject.getString("nombre"), jsonObject.getInt("monto"),jsonObject.getInt("descuento"));
 			new PedidosServices().insertOrUpdate(p);
 			response.setStatus(HttpServletResponse.SC_OK);
 			jsonResponse.put("message", "ok");

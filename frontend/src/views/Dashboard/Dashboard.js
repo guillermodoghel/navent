@@ -22,8 +22,8 @@ class Dashboard extends Component {
     super();
     this.state = {
       nombre: '',
-      monto: 0,
-      descuento: 0
+      monto: '',
+      descuento: ''
     };
   }
 
@@ -31,6 +31,15 @@ class Dashboard extends Component {
     evt.preventDefault();
     this.setState({ [evt.target.name]: evt.target.value });
   }
+
+  handleReset = () => {
+    this.setState({
+          nombre: '',
+          monto: '',
+          descuento: ''
+        });
+  }
+
   handleSubmit = async(evt) => {
     evt.preventDefault();
     try{
@@ -48,11 +57,7 @@ class Dashboard extends Component {
         toast.success("Pedido creado 😊", {
           position: toast.POSITION.TOP_RIGHT
         });
-        this.setState({
-          nombre: '',
-          monto: 0,
-          descuento: 0
-        });
+        this.handleReset();
       }else{
         throw new Error(response.status);
       }
@@ -98,7 +103,7 @@ class Dashboard extends Component {
                 </CardBody>
                 <CardFooter>
                   <Button type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Guardar</Button>{' '}
-                  <Button type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Borrar</Button>
+                  <Button type="reset" onClick={this.handleReset} size="sm" color="danger"><i className="fa fa-ban"></i> Borrar</Button>
                 </CardFooter>
               </Card>
             </Form>
